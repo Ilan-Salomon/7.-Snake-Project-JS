@@ -28,7 +28,7 @@ window.onload = function() {
     context = board.getContext("2d"); //used for drawing on the board
 
     placeFood();
-    document.addEventListener("keyup", changeDirection);
+    document.addEventListener("keydown", changeDirection);
     // update();
     setInterval(update, 1000/10); //100 milliseconds
 }
@@ -64,10 +64,15 @@ function update() {
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
 
+    //Score Count:
+    let scoreCount = snakeBody.length;
+    document.getElementById('score').innerHTML = "Score: " + scoreCount;
+    
+
     //game over conditions
     if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows*blockSize) {
         gameOver = true;
-        alert("Game Over");
+        alert("Game Over, your score in this game was: " +scoreCount);
     }
 
     for (let i = 0; i < snakeBody.length; i++) {
